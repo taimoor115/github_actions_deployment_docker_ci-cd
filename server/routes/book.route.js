@@ -3,8 +3,8 @@ import {
   createBook,
   getBooks,
   getBookById,
-  updateBook,
   deleteBook,
+  updateBook,
 } from "../controllers/book.controller.js";
 
 const router = express.Router();

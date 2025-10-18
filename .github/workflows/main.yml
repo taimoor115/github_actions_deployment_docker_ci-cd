@@ -1,0 +1,49 @@
+name: GITHUB_ACTIONS flow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      client_changed: ${{ steps.check_client.outputs.client }}
+      server_changed: ${{ steps.check_server.outputs.server }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for changes in client directory
+        id: check_client
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            client:
+              - 'client/**'
+
+      - name: Check for changes in server directory
+        id: check_server
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            server:
+              - 'server/**'
+
+  client:
+    needs: check-changes
+    runs-on: ubuntu-latest
+    if: needs.check-changes.outputs.client_changed == 'true'
+    steps:
+      - name: Client directory changed
+        run: echo "Client directory has changes. Proceeding with client job."
+
+  server:
+    needs: check-changes
+    runs-on: ubuntu-latest
+    if: needs.check-changes.outputs.server_changed == 'true'
+    steps:
+      - name: Server directory changed
+        run: echo "Server directory has changes. Proceeding with server job."

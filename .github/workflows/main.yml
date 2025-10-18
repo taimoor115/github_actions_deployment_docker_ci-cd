@@ -56,8 +56,8 @@ jobs:
             ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} \
             "sudo apt-get update && sudo apt-get install -y docker-compose-plugin && \
              cd /var/www/html/github_actions_deployment_docker_ci-cd && \
-             echo '${{ secrets.SERVER_PASSWORD }}' | sudo -S docker pull taimoorhussain/github-actions-client && \
-             echo '${{ secrets.SERVER_PASSWORD }}' | sudo -S docker compose up -d --no-deps --build client"
+             echo \"${{ secrets.SERVER_PASSWORD }}\" | sudo -S docker pull taimoorhussain/github-actions-client && \
+             echo \"${{ secrets.SERVER_PASSWORD }}\" | sudo -S docker compose up -d --no-deps --build client"
 
   server:
     needs: check-changes
@@ -89,5 +89,5 @@ jobs:
             ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} \
             "sudo apt-get update && sudo apt-get install -y docker-compose-plugin && \
              cd /var/www/html/github_actions_deployment_docker_ci-cd && \
-             echo '${{ secrets.SERVER_PASSWORD }}' | sudo -S docker pull taimoorhussain/github-actions-server && \
-             echo '${{ secrets.SERVER_PASSWORD }}' | sudo -S docker compose up -d --no-deps --build server"
+             echo \"${{ secrets.SERVER_PASSWORD }}\" | sudo -S docker pull taimoorhussain/github-actions-server && \
+             echo \"${{ secrets.SERVER_PASSWORD }}\" | sudo -S docker compose up -d --no-deps --build server"

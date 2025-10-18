@@ -54,10 +54,9 @@ jobs:
           sudo apt-get install -y sshpass
           sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no \
             ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} \
-            "sudo apt-get update && sudo apt-get install -y docker-compose-plugin && \
-             cd /var/www/html/github_actions_deployment_docker_ci-cd && \
-             echo \"${{ secrets.SERVER_PASSWORD }}\" | sudo -S docker pull taimoorhussain/github-actions-client && \
-             echo \"${{ secrets.SERVER_PASSWORD }}\" | sudo -S docker compose up -d --no-deps --build client"
+            "cd /var/www/html/github_actions_deployment_docker_ci-cd && \
+             docker pull taimoorhussain/github-actions-client && \
+             docker compose up -d --no-deps --build client"
 
   server:
     needs: check-changes
@@ -87,7 +86,6 @@ jobs:
           sudo apt-get install -y sshpass
           sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no \
             ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} \
-            "sudo apt-get update && sudo apt-get install -y docker-compose-plugin && \
-             cd /var/www/html/github_actions_deployment_docker_ci-cd && \
-             echo \"${{ secrets.SERVER_PASSWORD }}\" | sudo -S docker pull taimoorhussain/github-actions-server && \
-             echo \"${{ secrets.SERVER_PASSWORD }}\" | sudo -S docker compose up -d --no-deps --build server"
+            "cd /var/www/html/github_actions_deployment_docker_ci-cd && \
+             docker pull taimoorhussain/github-actions-server && \
+             docker compose up -d --no-deps --build server"

@@ -10,9 +10,11 @@ app.use(express.json());
 app.use("/api/books", bookRoutes);
 
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb://localhost:27017/bookapp")
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("✅ MongoDB connected");
-    app.listen(5000, () => console.log("🚀 Server running on port 5000"));
+    app.listen(process.env.PORT, () =>
+      console.log(`🚀 Server running on port ${process.env.PORT}`)
+    );
   })
   .catch((err) => console.error("MongoDB connection failed:", err));

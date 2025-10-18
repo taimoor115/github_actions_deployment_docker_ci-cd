@@ -55,9 +55,9 @@ jobs:
           sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no \
             ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} \
             "cd /var/www/html/github_actions_deployment_docker_ci-cd && \
-             sudo docker pull taimoorhussain/github-actions-client && \
-             sudo docker-compose down && \
-             sudo docker-compose up -d --no-deps --build client"
+             echo '${{ secrets.SERVER_PASSWORD }}' | sudo -S docker pull taimoorhussain/github-actions-client && \
+             echo '${{ secrets.SERVER_PASSWORD }}' | sudo -S docker-compose down && \
+             echo '${{ secrets.SERVER_PASSWORD }}' | sudo -S docker-compose up -d --no-deps --build client"
 
   server:
     needs: check-changes
@@ -88,6 +88,6 @@ jobs:
           sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no \
             ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} \
             "cd /var/www/html/github_actions_deployment_docker_ci-cd && \
-             sudo docker pull taimoorhussain/github-actions-server && \
-             sudo docker-compose down && \
-             sudo docker-compose up -d --no-deps --build server"
+             echo '${{ secrets.SERVER_PASSWORD }}' | sudo -S docker pull taimoorhussain/github-actions-server && \
+             echo '${{ secrets.SERVER_PASSWORD }}' | sudo -S docker-compose down && \
+             echo '${{ secrets.SERVER_PASSWORD }}' | sudo -S docker-compose up -d --no-deps --build server"

@@ -1,4 +1,4 @@
-name Thread Work flow
+name GITHUB_ACTIONS flow
 
 on:
   push:

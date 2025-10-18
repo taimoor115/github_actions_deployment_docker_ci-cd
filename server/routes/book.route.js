@@ -2,8 +2,8 @@ import express from "express";
 import {
   createBook,
   getBooks,
-  getBookById,
   deleteBook,
+  getBookById,
   updateBook,
 } from "../controllers/book.controller.js";
 

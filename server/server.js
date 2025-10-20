@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/health", (req, res) => {
-  res.status(200).send("Server is in testing...😄");
+  res.status(200).send("Server is working...😄");
 });
 app.use("/api/books", bookRoutes);
 
